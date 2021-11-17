@@ -155,11 +155,27 @@ You can change the theme of this by editing `src/assets/screen.scss`, I'd like t
 
 ### Progressive Web App?
 
+You might be wondering why it prompts you to add it to your home page like some desparate news site. (On desktop it's a bit better since it's a subtle "Install" in the URL bar...)
+
 The idea here is that you can "install" this site as an "app" that basically just uses your browser to render a *cached* version of the site. Currently, every page possible is cached in, so that when you run the "app" you'd get a quick character reference. Y'know, just for one of those days.
 
 Now that I'm writing this, maybe I should get to implementing an offline fallback page.
 
 If you want this, edit `src/manifest.webmanifest` and edit your own icons...
+
+### How to Deploy
+
+Like I said, I use Vercel, so go ahead and make an account there (using GitHub or whatever) and give them access to *some* of your repos.
+
+Configure Vercel to have access to your repo with the wiki on it, it should appear in the `Import Git Repository` box, click the big Import button.
+
+Skip Team configuration, and under `Build and Output Settings` you'd want to set the following:
+
+* Build command: `npm run build` or `yarn build`
+* Output directory: `dist`
+* Install command: `npm install` if you picked npm above, or `yarn install` if you picked yarn.
+
+If deployment fails, you can just edit it in the settings later, then redeploy.
 
 {{/markdown}}
 {{/content}}
