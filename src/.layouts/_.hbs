@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{> _head}}
+		<link rel="stylesheet" type="text/css" href="/assets/css/screen.scss" media="screen">
+	</head>
+	<body>
+		<header>
+			<h1><a href="/">{{> YOUR-WIKI-TITLE-HERE}}</a></h1>
+			<a href="#content" class="hidden">Skip navigation</a>
+			<a href="#main-menu" class="hidden show-menu" aria-hidden="true">Show menu</a>
+			{{> NAVIGATION}}
+		</header>
+		<div id="content">
+			{{#block "extra-before"}}
+			{{/block}}
+			<main>
+				{{#block "main"}}
+				{{/block}}
+			</main>
+			{{#block "extra-after"}}
+			{{/block}}
+			<footer>
+				<hr>
+				{{> FOOTER}}
+			</footer>
+		</div>
+		<script src="/assets/js/animation.js"></script>
+		<script src="/assets/js/service.js"></script>
+	</body>
+</html>

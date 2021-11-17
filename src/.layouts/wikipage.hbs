@@ -1,0 +1,59 @@
+{{#extend "_"}}
+	{{#if character-wallpaper}}
+		{{#content "extra-before"}}
+			<style>
+			/* It has to be done this way, otherwise the image will load on EVERY onScroll!! */
+			.wallpaper-image {
+				background-image: url({{character-wallpaper}});
+			}
+			</style>
+			<div class="wallpaper-image"></div>
+		{{/content}}
+	{{/if}}
+	
+	{{#content "main"}}
+	
+	<h2>{{name}}</h2>
+	
+	<section id="info">
+	<h3>Basic information</h3>
+		{{> infobox}}
+		{{#if has-additional-info}}
+			<div class="card">
+				{{#block "info"}}
+				{{/block}}
+			</div>
+		{{/if}}
+	</section>
+	
+	{{#if character-colors}}
+	<section id="colors">
+	<h3>Color palette</h3>
+		{{> colorbox}}
+		{{#if has-color-info}}
+			<div class="card">
+				{{#block "colors"}}
+				{{/block}}
+			</div>
+		{{/if}}
+	</section>
+	{{/if}}
+	
+	<section id="details">
+	<h3>Details</h3>
+		{{#block "details"}}
+		<!-- the contents of this block must start with <h4> -->
+		<i>This character has no additional details attached.</i>
+		{{/block}}
+	</section>
+	
+	{{#if has-gallery}}
+	<section id="gallery">
+	<h3>Gallery</h3>
+		{{#block "gallery"}}
+		{{/block}}
+	</section>
+	{{/if}}
+	
+	{{/content}}
+{{/extend}}

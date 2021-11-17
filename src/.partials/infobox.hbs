@@ -1,0 +1,24 @@
+<div class="chara-infobox">
+	{{#if character-image}}
+	<div class="_image">
+		<img src="{{character-image}}" width="200">
+	</div>
+	{{/if}}
+	<ul class="_info">
+	{{#each character}}
+		<li class="_entry">
+			<b class="_param">{{@key}}</b>
+			{{#if (isArray this)}}
+			<ul>
+				{{#each this}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+			{{else}}
+			<span class="hidden">-</span>
+			<span class="_value">{{this}}</span>
+			{{/if}}
+		</li>
+	{{/each}}
+	</ul>
+</div>

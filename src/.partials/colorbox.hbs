@@ -1,0 +1,14 @@
+<div class="chara-colorbox">
+	<ul>
+	{{#each character-colors}}
+		<li class="_color-entry">
+			<span class="_hex">
+				{{@key}}
+				<span class="hidden">-</span>
+				{{this}}
+			</span>
+			<span class="_color" style="--color: {{this}}"></span>
+		</li>
+	{{/each}}
+	</ul>
+</div>

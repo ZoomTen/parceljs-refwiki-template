@@ -1,0 +1,17 @@
+{
+  "name": "my-wiki-page",
+  "source": "src/index.hbs",
+  "scripts": {
+    "start": "parcel --no-cache src/index.hbs src/manifest.webmanifest src/service-worker.js",
+    "build": "parcel build --no-minify --no-source-maps src/index.hbs src/manifest.webmanifest src/service-worker.js",
+    "dev-start": "rm -rf .cache dist && npm run start",
+    "dev-build": "rm -rf .cache dist && npm run build"
+  },
+  "browserslist": "last 1 Chrome version",
+  "devDependencies": {
+    "parcel-plugin-handlebars": "^0.4.4",
+    "parcel-plugin-inject-manifest-service-worker": "^1.1.3",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.43.4"
+  }
+}

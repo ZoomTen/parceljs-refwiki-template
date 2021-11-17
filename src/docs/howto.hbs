@@ -1,0 +1,166 @@
+---
+title: How to Use this Template
+---
+{{#extend "main"}}
+{{#content "main"}}
+{{#markdown}}
+
+## How to use this template
+
+### Why?
+
+I kinda wanted to see if I can try making something in Vercel... and I ended up making a static clone of [Refsheet.net](http://refsheet.net), lmao.
+
+### What's in here?
+
+Immediately in the root directory, you'll find these:
+
+* `src` - Everything lives here.
+	* `.layouts` - Every layout used in your site.
+	* `.partials` - Small parts of your site used as components. Any file name that's capitalized here, you're encouraged to change it as first steps.
+	* `assets` - The images, CSS and JavaScript that's used in the main site.
+	* `chara` - A regular subdirectory in which to place your character pages.
+	* `docs` - Another regular subdirectory, for regular pages.
+	* (Add more subdirectories as needed!)
+	* The following files are provided for Progressive Web App support, and are optional:
+		* `service-worker.js`
+		* `assets/js/service.js` (used for loading `service-worker.js`, when you delete it don't forget to delete the line that mentions it inside `.layouts/_.hbs`!)
+		* `icon_192.png` & `icon_512.png`
+		* `manifest.webmanifest`
+* `handlebars.config.js` - This points to the layout and template stuff.
+* `package.json` - Dependencies and all that stuff.
+
+### Local Setup
+
+Install node.js and `npm`, follow directions for your operating system. Make sure that you can access `node`, `npm` and `npx` from the command line.
+
+<ol>
+	<li>
+		<p>
+			Enter <code>npm install</code> in the command line. Ignore the
+			warnings that pop up. If you have the infamous HDD lifespan-killing
+			directory that is <code>node_modules</code>, you're good.
+		</p>
+	</li>
+	<li>
+		<p>
+			Run the development server by entering <code>npm run start</code>.
+			You should then be able to access it by going to
+			<a href="http://localhost:1234">localhost:1234</a>.
+		</p>
+	</li>
+	<li>
+		<p>
+			Generate a static site (that assumes "/" as the root directory) by
+			entering <code>npm run build</code>.
+		</p>
+	</li>
+</ol>
+
+### How to edit pages
+
+Let's start with the home page (`src/index.hbs`).
+
+```
+---
+title: Home Page
+---
+```
+This is what's called "front matter", it contains a few variables that will be processed by both the layout template and the components. This is written in YAML format, and when you write them you can check if it'll work properly by finding a [YAML parser](https://yaml-online-parser.appspot.com/).
+
+Currently the only thing that needs to be on every page is the `title` variable, which will appear in the browsers' title bar.
+
+These next three lines:
+<pre><code>&#123;&#123;#extend "main"}}
+&#123;&#123;#content "main"}}
+&#123;&#123;#markdown}}
+</code></pre>
+...mark the start of the block which, respectively:
+
+* States that it's gonna be based on the template in `src/.layouts/main.hbs`
+* States that we're about to fill in a block inside the template, called `main`
+* States that we're starting a markdown block, which makes writing things a little easier
+
+After that you just write whatever you want, and then you close those three blocks kind of like HTML.
+
+### Editing wiki pages
+
+Let's go to (`src/chara/zumi.hbs`) and see what's inside...
+
+For the first few lines, you have the `title` variable as usual. But here comes a few wikipage-specific variables:
+
+* `character-image` is what gets shown as the main image for your character.
+* `character-wallpaper` is what gets shown as the header image on desktops and wider mobile screens.
+
+Now both of these are completely optional. But the variable immediately following it is where you'll be filling out most of your character's information: `character`.
+
+There are actually no rules for this other than it's just a key-value thing, where the value supports both text and a key-value thing of itself (but no more nested stuff as of yet!). So, you literally just put whatever you want there, and it'll automatically pop up in the info card.
+
+`character-colors` is where you'll list all the colors your character uses. A key-value thing, but there's one rule: The value must be a hex color number prefixed with #.
+
+And then some switches:
+* `has-gallery` - False or true, not supported yet but feel free to hack it in
+* `has-additional-info` - Whether or not you want additional info to be printed below the info card, the stuff that will be printed will be in the `"info"` content block.
+* `has-color-info` - Whether or not you want additional info to be printed below the color palette, the stuff that will be printed will be in the `"colors"` content block.
+
+Let's break the following down:
+<pre><code>&#123;&#123;#extend "wikipage"}}
+</code></pre>
+
+Signifies that the following will be based on the `src/.layouts/wikipage.hbs` template.
+
+<pre><code>&#123;&#123;#content "info"}}
+&#123;&#123;#markdown}}
+&nbsp;
+Is usually seen with his hoodie.
+&nbsp;
+&#123;&#123;/markdown}}
+&#123;&#123;/content}}
+</code></pre>
+
+Defines the `"info"` block using Markdown, will be shown under the info card because `has-additional-info` is set to `true`.
+
+<pre><code>&#123;&#123;#content "details"}}
+&#123;&#123;#markdown}}
+&nbsp;
+#### Background
+&nbsp;
+(write something here...)
+&nbsp;
+#### Trivia
+&nbsp;
+* He can be a bit feral at times.
+&nbsp;
+&#123;&#123;/markdown}}
+&#123;&#123;/content}}
+</code></pre>
+
+Defines the `"details"` block using Markdown. This is where you'll put things like background information, detailed storylines, detailed character relationships, random facts and so on.
+
+### What else?
+
+`src/.partials/NAVIGATION.hbs` seems like a good place to start linking pages.
+
+Recall the following:
+* `<li>List Item</li>` inside a `<ul>` block, for the menu items
+* `<a href="YOUR LINK HERE">LINK TEXT HERE</a>` for links
+
+Any first-level menu item (that is, a `<li>` immediately under the first `<ul>` under `<nav>`) must have an associated icon for now. (could copy the `World` entry)
+
+`src/.partials/YOUR-WIKI-TITLE-HERE.hbs` is literally just your wiki's title.
+
+`src/.partials/FOOTER.hbs` is currently a one-liner footer info.
+
+You can change the theme of this by editing `src/assets/screen.scss`, I'd like to point your attention to the `:root` style, right under the `/* theme start */` comment.
+
+### Progressive Web App?
+
+The idea here is that you can "install" this site as an "app" that basically just uses your browser to render a *cached* version of the site. Currently, every page possible is cached in, so that when you run the "app" you'd get a quick character reference. Y'know, just for one of those days.
+
+Now that I'm writing this, maybe I should get to implementing an offline fallback page.
+
+If you want this, edit `src/manifest.webmanifest` and edit your own icons...
+
+{{/markdown}}
+{{/content}}
+{{/extend}}

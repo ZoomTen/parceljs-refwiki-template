@@ -1,0 +1,68 @@
+---
+title: CSS Documentation
+---
+{{#extend "main"}}
+{{#content "main"}}
+{{#markdown}}
+
+## CSS style Documentation
+
+### Naming conventions
+
+* Unprefixed class names should be treated as global / a component
+* Class names prefixed with an underscore are local to a component
+* Class names prefixed with a dash indicate an attribute of a component
+
+### Component list
+
+<dl>
+	<dt>wallpaper-image</dt>
+	<dd>
+		<p>
+			Used in wiki pages. The background image should be set
+			using a dedicated <code>style</code> tag per page. This is
+			because using CSS custom properties with parallax effect
+			updates using JavaScript will trigger reloads of the background
+			image on every scroll.
+		</p>
+	</dd>
+	<dt>card</dt>
+	<dd>
+		<p>
+			Used to create short blurbs which visually appear as a
+			"card" on the page.
+		</p>
+	</dd>
+	<dt>chara-infobox</dt>
+	<dd>
+		<p>
+			Component list:
+		</p>
+		<ul>
+			<li>_image: is a div containing an <code>img</code></li>
+			<li>_info: is a list
+				<ul>
+					<li>_param</li>
+					<li>_value</li>
+				</ul>
+			</li>
+		</ul>
+	</dd>
+	<dt>chara-colorbox</dt>
+	<dd>
+		<ul>
+			<li>_color-entry</li>
+			<li>_color</li>
+			<li>_hex</li>
+		</ul>
+	</dd><dt>show-menu</dt>
+	<dd>
+		<p>
+			Mobile only
+		</p>
+	</dd>
+</dl>
+
+{{/markdown}}
+{{/content}}
+{{/extend}}
